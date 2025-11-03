@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+
+    tools{
+        maven 'maven'
+        jdk 'java-17'
+    }
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ManojKRISHNAPPA/complete-cicd-project-microdegree.git'
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                sh "mvn compile"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh "mvn package"
+            }
+        }
+    }
+
+    
+}
