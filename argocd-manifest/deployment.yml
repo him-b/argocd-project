@@ -2,52 +2,40 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fullstack-deployment
+  labels:
+    app: fullstack
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: fullstack
-  replicas: 1
   template:
     metadata:
       labels:
         app: fullstack
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: fullstack=himani708/fullstack
+        argocd-image-updater.argoproj.io/fullstack.update-strategy: latest
+        argocd-image-updater.argoproj.io/fullstack.allow-tags: regexp:^\d+$
+        argocd-image-updater.argoproj.io/write-back-method: git
+        argocd-image-updater.argoproj.io/git-branch: main
     spec:
       containers:
       - name: fullstack
-        image: manojkrishnappa/fullstack:8
+        image: himani708/fullstack:1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
-        # Adding health checks (customize the path and port as needed)
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "500m"
-          limits:
-            memory: "512Mi"
-            cpu: "1"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: fullstack-service  
+  name: fullstack-service
 spec:
   selector:
     app: fullstack
   ports:
-  - protocol: "TCP"
+  - protocol: TCP
     port: 80
     targetPort: 8080
   type: LoadBalancer
