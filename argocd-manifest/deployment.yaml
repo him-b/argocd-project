@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: fullstack
-        image: himani708/fullstack:1
+        image: himani708/fullstack:6
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
