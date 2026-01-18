@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fullstack-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/him-b/argocd-project.git' # your repo
+    targetRevision: main
+    path: 'argocd-manifest' # folder in repo where deployment.yaml lives
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
