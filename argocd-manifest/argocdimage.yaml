@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/him-b/argocd-project.git' # your repo
+    repoURL: 'git@github.com:him-b/argocd-project.git' # your repo
     targetRevision: main
     path: 'argocd-manifest' # folder in repo where deployment.yaml lives
   destination:
