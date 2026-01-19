@@ -14,6 +14,7 @@ spec:
       labels:
         app: fullstack
       annotations:
+        # Argo CD Image Updater annotations
         argocd-image-updater.argoproj.io/image-list: fullstack=himani708/fullstack
         argocd-image-updater.argoproj.io/fullstack.update-strategy: latest
         argocd-image-updater.argoproj.io/fullstack.allow-tags: regexp:^\d+$
@@ -22,7 +23,7 @@ spec:
     spec:
       containers:
       - name: fullstack
-        image: himani708/fullstack:6
+        image: himani708/fullstack:6  # starting tag
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
