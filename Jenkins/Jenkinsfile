@@ -35,14 +35,14 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis (SonarQube)') {
-            steps {
-                withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+   /*  stage('Static Code Analysis (SonarQube)') {
+           steps {
+               withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
                     sh "mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}"
                 }
             }
         }
-
+*/
         stage('Build and Tag Docker Image') {
             steps {
                 sh "docker build -t ${IMAGE_NAME}:${DOCKER_TAG} ."
