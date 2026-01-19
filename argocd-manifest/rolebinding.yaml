@@ -1,13 +1,1 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: argocd-image-updater-binding
-  namespace: default                 # must match the Role's namespace
-subjects:
-  - kind: ServiceAccount
-    name: argocd-image-updater       # the SA that Image Updater uses
-    namespace: argocd                # where Image Updater pod lives
-roleRef:
-  kind: Role
-  name: argocd-image-updater         # must match Role name
-  apiGroup: rbac.authorization.k8s.io
+
